@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# SPDX-FileCopyrightText: 2021 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+#
+# SPDX-License-Identifier: MIT
+
+set -e
+
+repo=$1
+shift
+branch=$1
+shift
+
+if [ -z "$repo" -o -z "$branch" ]; then
+    echo "Usage: $0 [repo] [branch] [args, ...]"
+    exit 1
+fi
+
+git clone -b $branch git://github.com/lirios/${repo}
+cd $repo
+mkdir -p build
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=/usr $@
+make -j
+make install
+cd ../..
