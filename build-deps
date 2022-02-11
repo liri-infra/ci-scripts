@@ -16,8 +16,7 @@ fi
 
 curdir=$(dirname `readlink -f $0`)
 
-IFS=":"
-for repo in $deps; do
+for repo in ${deps//:/ }; do
     if [ "$repo" == "fluid" ]; then
         args="-DFLUID_WITH_DOCUMENTATION:BOOL=OFF"
     else
