@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# SPDX-FileCopyrightText: 2022 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
+set -e
+
+branch=$1
+deps=$2
+
+if [ -z "$branch" -o -z "$deps" ]; then
+    echo "Usage: $0 [branch] [dependencies separated by ':']"
+    exit 1
+fi
+
+curdir=$(dirname `readlink -f $0`)
+
+IFS=":"
+for repo in $deps; do
+    if [ "$repo" == "fluid" ]; then
+        args="-DFLUID_WITH_DOCUMENTATION:BOOL=OFF"
+    else
+        args=""
+    fi
+    $curdir/build-liri $repo $branch $args
+done
