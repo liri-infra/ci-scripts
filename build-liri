@@ -16,7 +16,7 @@ if [ -z "$repo" -o -z "$branch" ]; then
     exit 1
 fi
 
-git clone -b $branch git://github.com/lirios/${repo}
+git clone -b $branch https://github.com/lirios/${repo}
 cd $repo
 mkdir -p build
 cd build
