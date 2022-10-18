@@ -22,5 +22,5 @@ mkdir -p build
 cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=/usr $@
 make -j
-make install
+sudo make install
 cd ../..
