@@ -10,10 +10,11 @@ branch=$1
 deps=$2
 
 if [ -z "$branch" -o -z "$deps" ]; then
-    echo "Usage: $0 [branch] [dependencies separated by ':']"
+    echo "Usage: $0 [branch] [dependencies separated by space]"
     exit 1
 fi
 
+deps=$(echo $deps | sed -e 's, ,:,g')
 curdir=$(dirname `readlink -f $0`)
 
 for repo in ${deps//:/ }; do
