@@ -23,5 +23,5 @@ for repo in ${deps//:/ }; do
     else
         args=""
     fi
-    $curdir/build-liri $repo $branch $args
+    $curdir/build-liri $repo $branch $args -DBUILD_TESTING:BOOL=OFF
 done
